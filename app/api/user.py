@@ -41,13 +41,10 @@ class UserCollectionResource(Resource):
             'data': users
         }
 
-
+    @marshal_with(user_fields)
     def post(self):
-        args = user_parser.parse_args()
-        user = User(username=args.username, email=args.email)
-        db.session.add(user)
-        res = db.session.commit()
-        return res
+        user = User.create(**user_parser.parse_args())
+        return user, 201
 
 
 api.add_resource(UserResource, '/users/<username>')
