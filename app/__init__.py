@@ -46,9 +46,9 @@ def register_error_handlers(app):
         # app.logger.error(jsonify(error))
         return jsonify(error.to_dict()), getattr(error, 'code')
 
-    @app.errorhandler(Exception)
-    def default_error_handler(e):
-        """Returns Internal server error"""
-        error = ServerError()
-        # app.logger.error(jsonify(error))
-        return jsonify(error.to_dict()), getattr(error, 'code', 500)
+    # @app.errorhandler(Exception)
+    # def default_error_handler(e):
+    #     """Returns Internal server error"""
+    #     error = ServerError()
+    #     # app.logger.error(jsonify(error))
+    #     return jsonify(error.to_dict()), getattr(error, 'code', 500)
