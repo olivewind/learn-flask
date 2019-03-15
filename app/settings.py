@@ -12,6 +12,7 @@ class Config(object):
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
     ERROR_404_HELP = False
     SQLALCHEMY_TRACK_MODIFICATIONS = True
+    PROPAGATE_EXCEPTIONS = True
 
 
 class ProdConfig(Config):

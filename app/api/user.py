@@ -5,8 +5,9 @@
 # @Author  : Olive.wang
 
 from app.api import api
-from flask_restful import Resource, reqparse, fields, marshal_with
+from flask_restful import Resource, reqparse, fields, marshal_with, abort
 from app.models.user import User
+from app.exceptions import NotFoundError
 from app.database import db
 
 
@@ -23,14 +24,12 @@ user_fields = {
 
 class UserResource(Resource):
 
-    @marshal_with(user_fields)
+    # @marshal_with(user_fields)
     def get(self, username=None):
-        user = User.query.filter_by(username = username).first()
+        user = User.query.filter_by(username=username).first()
         if user is None:
-            return {
-                       'message': 'not found'
-                   }, 404
-        return user
+            raise NotFoundError(message="not found username like '{0}'".format(username))
+        return user.to_dict()
 
 
 class UserCollectionResource(Resource):
