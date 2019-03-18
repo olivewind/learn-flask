@@ -43,12 +43,10 @@ def register_error_handlers(app):
     @app.errorhandler(NotAuthorizedError)
     @app.errorhandler(ValidationError)
     def error_handler(error):
-        # app.logger.error(jsonify(error))
         return jsonify(error.to_dict()), getattr(error, 'code')
 
-    # @app.errorhandler(Exception)
-    # def default_error_handler(e):
-    #     """Returns Internal server error"""
-    #     error = ServerError()
-    #     # app.logger.error(jsonify(error))
-    #     return jsonify(error.to_dict()), getattr(error, 'code', 500)
+    @app.errorhandler(Exception)
+    def default_error_handler(e):
+        """Returns Internal server error"""
+        error = ServerError(message=e.message)
+        return jsonify(error.to_dict()), getattr(error, 'code', 500)
