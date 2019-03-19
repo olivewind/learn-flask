@@ -8,7 +8,6 @@ from app.api import api
 from flask_restful import Resource, reqparse, fields, marshal_with, abort
 from app.models.user import User
 from app.exceptions import NotFoundError
-from app.database import db
 
 
 user_parser = reqparse.RequestParser()
