@@ -20,7 +20,11 @@ class ProdConfig(Config):
     ENV = 'prod'
     DEBUG = False
     # DB URL variable set by heroku
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '')
+    # SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '')
+    ## 替换成生产环境的数据库地址
+    DB_NAME = 'app.db'
+    DB_PATH = os.path.join(Config.PROJECT_ROOT, DB_NAME)
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///{0}'.format(DB_PATH)
 
 
 class DevConfig(Config):
